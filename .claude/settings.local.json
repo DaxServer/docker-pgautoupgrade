@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:github.com)",
-      "Bash(but status:*)"
+      "Bash(but status:*)",
+      "Bash(gh pr view:*)"
     ]
   }
 }
