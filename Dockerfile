@@ -17,9 +17,8 @@ RUN cp /tmp/readline/* /usr/lib/
 # Squash image
 FROM scratch
 COPY --from=pgautoupgrade / /
-ENV \
-    PGTARGET=18 \
-    PGDATA=/var/lib/postgresql/data
+ENV PGTARGET=18
+ENV PGDATA=/var/lib/postgresql/${PGTARGET}/docker
 WORKDIR /var/lib/postgresql
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]
