@@ -17,6 +17,13 @@ The entrypoint is saved to `/docker-entrypoint.sh` first because `/usr/local/bin
 readline libs are also saved to `/tmp/readline/` and restored after the copy — PostGIS alpine ships
 an older readline that lacks symbols bash was compiled against (`rl_print_keybinding`, etc.).
 
+## PGDATA
+
+pgautoupgrade for PostgreSQL 18 uses `PGDATA=/var/lib/postgresql/18/docker` (not the traditional `/var/lib/postgresql/data`).
+The `FROM scratch` squash stage loses all ENV vars from the base image, so `PGDATA` must be explicitly redeclared.
+The fallback in the entrypoint is `/var/lib/postgresql/data` (wrong), causing a fresh init while real data sits untouched
+at the correct path.
+
 ## Local Testing
 
 `postgis/postgis:18-3.6-alpine` has no arm64 variant — build and run with `--platform linux/amd64` on Apple Silicon.

@@ -19,7 +19,7 @@ FROM scratch
 COPY --from=pgautoupgrade / /
 ENV \
     PGTARGET=18 \
-    PGDATA=/var/lib/postgresql/data
+    PGDATA=/var/lib/postgresql/18/docker
 WORKDIR /var/lib/postgresql
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]
